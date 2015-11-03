@@ -7,7 +7,7 @@ filter([], _) -> [];
 filter([H|T], Max) ->
   case Max < H of
     true  -> filter(T, Max);
-    false -> [H] ++ filter(T, Max)
+    false -> [H | filter(T, Max)]
   end.
 
 reverse([])    -> [];
