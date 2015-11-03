@@ -6,7 +6,7 @@
 new() -> [].
 
 write(Key, Element, Db) ->
-  [{Key, Element}] ++ Db.
+  [{Key, Element} | Db].
 
 read(_, []) ->
   {error, instance};
@@ -39,7 +39,7 @@ match(DesiredElement, Db, Matches) ->
   [{Key, Element}|T] = Db,
   %% Can be rewritten with List Comprehensions
   case DesiredElement =:= Element of
-    true  -> match(DesiredElement, T, [Key] ++ Matches);
+    true  -> match(DesiredElement, T, [Key | Matches]);
     false -> match(DesiredElement, T, Matches)
   end.
 
@@ -49,5 +49,5 @@ delete(KeyToDelete, Db) ->
   %% Can be rewritten with List Comprehensions
   case KeyToDelete =:= Key of
     true  -> delete(KeyToDelete, T);
-    false -> [{Key, Element}] ++ delete(KeyToDelete, T)
+    false -> [{Key, Element} | delete(KeyToDelete, T)]
   end.
