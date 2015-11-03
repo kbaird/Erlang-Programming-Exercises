@@ -7,5 +7,5 @@ create(N) -> lists:reverse(reverse_create(N)).
 
 reverse_create(1) -> [1];
 reverse_create(N) when N < 1 -> erlang:error('create/1 can only handle positive arguments.');
-reverse_create(N) -> [N] ++ reverse_create(N-1).
+reverse_create(N) -> [N | reverse_create(N-1)].
 
